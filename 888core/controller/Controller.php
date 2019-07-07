@@ -127,7 +127,8 @@ if (!class_exists('Tech888f_Controller')) {
             // Load libs css
             /* wishlist plugins has default font-awesome css */
             if (!class_exists('YITH_WCWL_Init')) {
-                wp_enqueue_style('front-end-font-awesome', $css_url . 'libs/font-awesome.min.css');
+              //  wp_enqueue_style('front-end-font-awesome', $css_url . 'libs/font-awesome.min.css');
+                wp_enqueue_style('front-end-font-awesome', 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
             }
             wp_enqueue_style('bootstrap-theme', $css_url . 'libs/bootstrap-theme.min.css');
             wp_enqueue_style('jquery-fancybox', $css_url . 'libs/jquery.fancybox.min.css');

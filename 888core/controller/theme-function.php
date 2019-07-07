@@ -134,7 +134,7 @@ if (!function_exists('tech888f_get_post_grid_specific')) {
     function tech888f_get_post_grid_specific($style = 'element')
     {
         $list = apply_filters('tech888f_get_post_grid_specific', array(
-            'default' => esc_html__('Default', 'ripara'),
+            '' => esc_html__('Default', 'ripara'),
             'style2' => esc_html__('Post grid #2', 'ripara'),
             'style3' => esc_html__('Post grid #3', 'ripara'),
             'related' => esc_html__('Post grid Related', 'ripara'),
