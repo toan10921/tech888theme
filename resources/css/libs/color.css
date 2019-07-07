@@ -1,0 +1,53 @@
+/*Main Color*/
+a:hover,
+a:focus,
+a:active {
+  color: #df412f;
+}
+.color {
+  color: #df412f;
+}
+.bg-color {
+  background: #df412f;
+}
+.desc.color {
+  color: #df412f;
+}
+.outer-nav > ul > li > a:hover {
+  color: #df412f;
+}
+.dropdown-list li a:hover {
+  background: #df412f;
+}
+.product-title a:hover {
+  color: #df412f;
+}
+.popup-icon {
+  color: #df412f;
+}
+body .scroll-top {
+  background: #df412f;
+}
+.preload #loading {
+  background-color: #df412f;
+}
+.outer-nav > ul > li:hover > a {
+  color: #df412f;
+}
+.shop-button:hover {
+  background: #df412f;
+}
+.contact-form-page input[type="submit"]:hover {
+  background-color: #df412f;
+}
+
+@media (max-width: 767px) {
+  .outer-nav > ul li:hover > a {
+    color: #df412f !important;
+  }
+  .outer-nav .menu-mobile span,
+  .outer-nav .menu-mobile::before,
+  .outer-nav .menu-mobile::after {
+    background: #df412f;
+  }
+}
