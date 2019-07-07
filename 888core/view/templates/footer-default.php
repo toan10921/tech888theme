@@ -7,7 +7,9 @@
  */
 
 global $tech888f_option;
-$page_id = apply_filters('tech888f_footer_page_id',$tech888f_option['tech888f_footer_content']);
+if(isset( $tech888f_option['tech888f_footer_content'])){
+    $page_id = apply_filters('tech888f_footer_page_id',$tech888f_option['tech888f_footer_content']);
+}
 if(!empty($page_id)) {?>
     <div id="footer" class="footer-page">
         <div class="container">

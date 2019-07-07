@@ -108,6 +108,7 @@ $sub_section = array(
             'title' => esc_html__('Sepicfy Related Post Item', 'redux-framework-demo'),
             'subtitle' => esc_html__('Choose your specific display of related post item.', 'redux-framework-demo'),
             'options' => tech888f_get_post_grid_specific(),
+            'default' => 'default',
             'select2' => array('allowClear' => false),
             'required' => array( 'tech888f_post_related_post_stats', '=', true )
         ),

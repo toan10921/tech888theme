@@ -6,7 +6,7 @@
  * Time: 9:54 PM
  */
 global $tech888f_option;
-if(!empty( $tech888f_option['tech888f_header_content'])){
+if(isset( $tech888f_option['tech888f_header_content'])){
     $page_id = apply_filters('tech888f_header_page_id',$tech888f_option['tech888f_header_content']);
 }
 if (!empty($page_id)) {
