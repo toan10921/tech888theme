@@ -160,11 +160,15 @@ if (!class_exists('Tech888f_Controller')) {
             global $tech888f_option;
             if ((!is_front_page() && is_home()) || (is_front_page() && is_home())) {
                 $pos = $tech888f_option['tech888f_blog_sidebar_pos'];
-                $sidebar_id = $tech888f_option['tech888f_blog_sidebar_id'];
+                if(isset($tech888f_option['tech888f_blog_sidebar_id'])){
+                    $sidebar_id = $tech888f_option['tech888f_blog_sidebar_id'];
+                }
             } else {
                 if (is_single()) {
                     $pos = tech888f_get_opt('tech888f_post_sidebar_pos');
-                    $sidebar_id = tech888f_get_opt('tech888f_post_sidebar_id');
+                    if(isset($tech888f_option['tech888f_blog_sidebar_id'])){
+                        $sidebar_id = tech888f_get_opt('tech888f_post_sidebar_id');
+                    }
                 } else {
                     $pos = tech888f_get_opt('tech888f_page_sidebar_pos');
                     $sidebar_id = tech888f_get_opt('tech888f_page_sidebar_id');
@@ -202,7 +206,7 @@ if (!class_exists('Tech888f_Controller')) {
                     $sidebar_id = tech888f_get_opt('tech888f_sidebar_page_search', 'blog-sidebar');
                 }
             }
-            if ($sidebar_id) $sidebar['id'] = $sidebar_id;
+            if (isset($sidebar_id)) $sidebar['id'] = $sidebar_id;
             if ($pos) $sidebar['position'] = $pos;
             return $sidebar;
         }
