@@ -382,7 +382,7 @@ if(class_exists("woocommerce")){
             <div id="main-content" class="content-page">
                 <div class="container">
                     <div class="row">
-                        <?php tech888f_output_sidebar('left')?>
+                        <?php tech888f_get_template_sidebar('left')?>
                         <div class="main-wrap-shop <?php echo esc_attr(tech888f_get_main_class()); ?>">
             <?php
         }
@@ -391,7 +391,7 @@ if(class_exists("woocommerce")){
         function tech888f_woocommerce_wrap_after(){       
             ?>
                         </div><!-- main-wrap-shop -->
-                        <?php tech888f_output_sidebar('right')?>
+                        <?php tech888f_get_template_sidebar('right')?>
                     </div> <!-- close row --> 
                 </div> <!-- close container --> 
             </div>  <!-- close content-page -->    

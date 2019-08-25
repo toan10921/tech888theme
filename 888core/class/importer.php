@@ -1,14 +1,14 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: toanngo92
- * Date: 2/2/2019
- * Time: 7:33 PM
+ * Created by Sublime Text 2.
+ * User: thanhhiep992
+ * Date: 13/08/15
+ * Time: 10:20 AM
  */
 
-if(class_exists('tech888f_PluginsImporter') and !class_exists('tech888f_Importer'))
+if(class_exists('Tech888f_PluginsImporter') and !class_exists('Tech888f_Importer'))
 {
-    class tech888f_Importer extends  tech888f_PluginsImporter
+    class Tech888f_Importer extends  Tech888f_PluginsImporter
     {
         static function init()
         {
@@ -22,14 +22,14 @@ if(class_exists('tech888f_PluginsImporter') and !class_exists('tech888f_Importer
 
                 //Check Permission
                 if(!current_user_can('manage_options')){
-                    echo json_encode(array('status'=>0,'message'=>esc_html__('You do not have permission to do this','ripara')));die;
+                    echo json_encode(array('status'=>0,'message'=>esc_html__('You do not have permission to do this','7upframework')));die;
                 }
 
                 self::load_lib();
 
                 //Check Importer Plugins was installed
                 if ( !class_exists( 'WP_Importer' ) or ! class_exists( 'WP_Import' ) ){
-                    echo json_encode(array('status'=>0,'message'=>esc_html__('Importer Class Was Not Installed','ripara')));die;
+                    echo json_encode(array('status'=>0,'message'=>esc_html__('Importer Class Was Not Installed','7upframework')));die;
                 }
                 global $tech888f_config;
                 $st_import_config = $tech888f_config['import_config'];
@@ -47,21 +47,21 @@ if(class_exists('tech888f_PluginsImporter') and !class_exists('tech888f_Importer
                     //Update theme_options
                     $data_option= $tech888f_config['import_theme_option'];
                     if(!empty($data_option)){
-                        $options=unserialize(ot_decode($data_option)); // unserialize
-                        if(!function_exists('ot_options_id'))
+                        $options=json_decode($data_option,true); // unserialize
+                        if(!function_exists('tech888f_get_option_name'))
                         {
                             echo json_encode( array(
                                     'status'   =>0,
-                                    'messenger'=>"<span class='red'>".esc_html__("Plugin: Option Tree must be installed first. Stop working!","ripara")."</span>",
+                                    'messenger'=>"<span class='red'>".esc_html__("Plugin: 7up core must be installed first. Stop working!","7upframework")."</span>",
                                     'next_url' => ''
                                 )
                             );
                             die;
                         }
-                        update_option( ot_options_id(), $options ); // and overwrite the current theme-options
+                        update_option( tech888f_get_option_name(), $options ); // and overwrite the current theme-options
                         echo json_encode( array(
                                 'status'   =>"ok",
-                                'messenger'=>esc_html__("Importing the demo theme options...","ripara")."<span>".esc_html__("DONE!","ripara")."</span><br>",
+                                'messenger'=>esc_html__("Importing the demo theme options...","7upframework")."<span>".esc_html__("DONE!","7upframework")."</span><br>",
                                 'next_url' =>  admin_url(self::$_import_page."&7up_do_import=1&media={$import_media}&package={$package}&step=" . ($step + 1))
                             )
                         );
@@ -69,7 +69,7 @@ if(class_exists('tech888f_PluginsImporter') and !class_exists('tech888f_Importer
                     else{
                         echo json_encode( array(
                                 'status'   =>0,
-                                'messenger'=>"<span class='red'>".esc_html__("Theme option contain NULL content. Stop working!","ripara")."</span>",
+                                'messenger'=>"<span class='red'>".esc_html__("Theme option contain NULL content. Stop working!","7upframework")."</span>",
                                 'next_url' => ''
                             )
                         );
@@ -87,7 +87,7 @@ if(class_exists('tech888f_PluginsImporter') and !class_exists('tech888f_Importer
                         $import_widgets = self::wie_import_data( $data_object );
                         echo json_encode( array(
                                 'status'   =>1,
-                                'messenger'=>esc_html__("Importing the demo widgets...","ripara")." <span>".esc_html__("DONE!","ripara")."</span>.<br>",
+                                'messenger'=>esc_html__("Importing the demo widgets...","7upframework")." <span>".esc_html__("DONE!","7upframework")."</span>.<br>",
                                 'next_url' => admin_url(self::$_import_page."&7up_do_import=1&media={$import_media}&package={$package}&step=" . ($step + 1)),
                             )
                         );
@@ -95,7 +95,7 @@ if(class_exists('tech888f_PluginsImporter') and !class_exists('tech888f_Importer
                     else{
                         echo json_encode( array(
                                 'status'   =>0,
-                                'messenger'=>"<span class='red'>".esc_html__("Widget option contain NULL content. Stop working!","ripara")."</span>",
+                                'messenger'=>"<span class='red'>".esc_html__("Widget option contain NULL content. Stop working!","7upframework")."</span>",
                                 'next_url' => ''
                             )
                         );
@@ -112,7 +112,7 @@ if(class_exists('tech888f_PluginsImporter') and !class_exists('tech888f_Importer
                     if(!$file_name){
                         echo json_encode( array(
                                 'status'   =>0,
-                                'messenger'=>"<span class='red'>".esc_html__("File Not Found. Stop working!","ripara")."</span>",
+                                'messenger'=>"<span class='red'>".esc_html__("File Not Found. Stop working!","7upframework")."</span>",
                                 'next_url' => ''
                             )
                         );
@@ -197,7 +197,7 @@ if(class_exists('tech888f_PluginsImporter') and !class_exists('tech888f_Importer
                     $nexturl = admin_url(self::$_import_page . "&7up_do_import=1&package={$package}&step=" . ($step+1) );
                     echo json_encode(array(
                             'status' => 1,
-                            'messenger' => esc_html__("Importing menu settings ...","ripara")." <span>".esc_html__("DONE!","ripara")."</span><br>",
+                            'messenger' => esc_html__("Importing menu settings ...","7upframework")." <span>".esc_html__("DONE!","7upframework")."</span><br>",
                             'next_url' => $nexturl,
                         )
                     );
@@ -208,7 +208,7 @@ if(class_exists('tech888f_PluginsImporter') and !class_exists('tech888f_Importer
                     // Set reading options
                     if(!$set_woocommerce_page) {
                         $next_url = '';
-                        $messenger = '<span>'.esc_html__("All Done! Have Fun","ripara").'</span>';
+                        $messenger = '<span>'.esc_html__("All Done! Have Fun","7upframework").'</span>';
                     }
                     else {
                         $next_url = admin_url(self::$_import_page . "&7up_do_import=1&package={$package}&step=" . ($step+1) );
@@ -231,7 +231,7 @@ if(class_exists('tech888f_PluginsImporter') and !class_exists('tech888f_Importer
 
                     echo json_encode( array(
                             'status'   =>"ok",
-                            'messenger'=>esc_html__("Setting reading options...","ripara")." <span>".esc_html__("DONE!","ripara")."</span><br/>".$messenger,
+                            'messenger'=>esc_html__("Setting reading options...","7upframework")." <span>".esc_html__("DONE!","7upframework")."</span><br/>".$messenger,
                             'next_url' => $next_url,
                         )
                     );
@@ -259,7 +259,7 @@ if(class_exists('tech888f_PluginsImporter') and !class_exists('tech888f_Importer
                     }
                     echo json_encode( array(
                             'status'   =>"ok",
-                            'messenger'=>esc_html__("Setting Woocommerce options...","ripara")." <span>".esc_html__("DONE!","ripara")."</span><br/><span>".esc_html__("All Done! Have Fun","ripara")."</span>",
+                            'messenger'=>esc_html__("Setting Woocommerce options...","7upframework")." <span>".esc_html__("DONE!","7upframework")."</span><br/><span>".esc_html__("All Done! Have Fun","7upframework")."</span>",
                             'next_url' => '',
                         )
                     );
@@ -270,5 +270,5 @@ if(class_exists('tech888f_PluginsImporter') and !class_exists('tech888f_Importer
         }
     }
 
-    tech888f_Importer::init();
+    Tech888f_Importer::init();
 }

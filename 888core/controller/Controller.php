@@ -41,10 +41,11 @@ if (!class_exists('Tech888f_Controller')) {
             // Before/After append settings
             $terms = array('product_cat', 'product_tag', 'category', 'post_tag');
             foreach ($terms as $term_name) {
-                add_action($term_name . '_add_form_fields', array(__CLASS__, 'tech888f_product_cat_metabox_add'), 10, 1);
-                add_action($term_name . '_edit_form_fields', array(__CLASS__, 'tech888f_product_cat_metabox_edit'), 10, 1);
-                add_action('created_' . $term_name, array(__CLASS__, 'tech888f_product_save_category_metadata'), 10, 1);
-                add_action('edited_' . $term_name, array(__CLASS__, 'tech888f_product_save_category_metadata'), 10, 1);
+                //add_action($term_name . '_add_form_fields','tech888f_product_cat_metabox_add');
+                //add_action($term_name . '_add_form_fields', 'tech888f_product_cat_metabox_add', 10, 1);
+                //add_action($term_name . '_edit_form_fields', array(__CLASS__, 'tech888f_product_cat_metabox_edit'), 10, 1);
+                //add_action('created_' . $term_name, array(__CLASS__, 'tech888f_product_save_category_metadata'), 10, 1);
+                //add_action('edited_' . $term_name, array(__CLASS__, 'tech888f_product_save_category_metadata'), 10, 1);
             }
             // Before/After append display
             add_action('tech888f_before_content', array(__CLASS__, 'tech888f_append_content_before'), 10);
@@ -107,9 +108,8 @@ if (!class_exists('Tech888f_Controller')) {
             // ENQUEUE CSS
 
             /* load icon lib visual composer */
-            if(!empty($tech888f_option['tech888f_icon_libs'])){
-                $icon_lib = $tech888f_option['tech888f_icon_libs'];
-            }
+
+            $icon_lib = $tech888f_option['tech888f_icon_libs'];
 
             if (function_exists('vc_icon_element_fonts_enqueue')) vc_icon_element_fonts_enqueue($icon_lib);
 
@@ -127,8 +127,7 @@ if (!class_exists('Tech888f_Controller')) {
             // Load libs css
             /* wishlist plugins has default font-awesome css */
             if (!class_exists('YITH_WCWL_Init')) {
-              //  wp_enqueue_style('front-end-font-awesome', $css_url . 'libs/font-awesome.min.css');
-                wp_enqueue_style('front-end-font-awesome', 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+                wp_enqueue_style('front-end-font-awesome', $css_url . 'libs/font-awesome.min.css');
             }
             wp_enqueue_style('bootstrap-theme', $css_url . 'libs/bootstrap-theme.min.css');
             wp_enqueue_style('jquery-fancybox', $css_url . 'libs/jquery.fancybox.min.css');
@@ -161,15 +160,11 @@ if (!class_exists('Tech888f_Controller')) {
             global $tech888f_option;
             if ((!is_front_page() && is_home()) || (is_front_page() && is_home())) {
                 $pos = $tech888f_option['tech888f_blog_sidebar_pos'];
-                if(isset($tech888f_option['tech888f_blog_sidebar_id'])){
-                    $sidebar_id = $tech888f_option['tech888f_blog_sidebar_id'];
-                }
+                $sidebar_id = $tech888f_option['tech888f_blog_sidebar_id'];
             } else {
                 if (is_single()) {
                     $pos = tech888f_get_opt('tech888f_post_sidebar_pos');
-                    if(isset($tech888f_option['tech888f_blog_sidebar_id'])){
-                        $sidebar_id = tech888f_get_opt('tech888f_post_sidebar_id');
-                    }
+                    $sidebar_id = tech888f_get_opt('tech888f_post_sidebar_id');
                 } else {
                     $pos = tech888f_get_opt('tech888f_page_sidebar_pos');
                     $sidebar_id = tech888f_get_opt('tech888f_page_sidebar_id');
@@ -207,7 +202,7 @@ if (!class_exists('Tech888f_Controller')) {
                     $sidebar_id = tech888f_get_opt('tech888f_sidebar_page_search', 'blog-sidebar');
                 }
             }
-            if (isset($sidebar_id)) $sidebar['id'] = $sidebar_id;
+            if ($sidebar_id) $sidebar['id'] = $sidebar_id;
             if ($pos) $sidebar['position'] = $pos;
             return $sidebar;
         }

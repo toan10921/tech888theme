@@ -7,7 +7,7 @@
  */
 get_header();?>
     <div id="main-content"  class="main-page-default">
-        <?php do_action('s7upf_before_main_content')?>
+        <?php do_action('tech888fbefore_main_content')?>
         <div class="container">
             <div class="row">
                 <?php tech888f_get_template_sidebar('left') ?>
@@ -36,7 +36,7 @@ get_header();?>
                             'link_before' => '<span>',
                             'link_after'  => '</span>',
                         ) );
-                        //s7upf_get_template( 'share','',false,true );
+                        //tech888fget_template( 'share','',false,true );
                         tech888f_get_template_post( 'single/author','',false,true );
                         tech888f_get_template_post( 'single/navigation','',false,true );
                         tech888f_get_template_post( 'single/related','',false,true );
@@ -47,6 +47,6 @@ get_header();?>
                 <?php tech888f_get_template_sidebar('right')?>
             </div>
         </div>
-        <?php do_action('s7upf_after_main_content')?>
+        <?php do_action('tech888fafter_main_content')?>
     </div>
 <?php get_footer();?>

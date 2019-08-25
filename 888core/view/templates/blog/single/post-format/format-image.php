@@ -1,10 +1,10 @@
 <?php
 $data = $st_link_post= $s_class = '';
 global $post;
-$s7upf_image_blog = get_post_meta(get_the_ID(), 'format_image', true);
-if(!empty($s7upf_image_blog)){
+$tech888fimage_blog = get_post_meta(get_the_ID(), 'format_image', true);
+if(!empty($tech888fimage_blog)){
     $data .='<div class="single-post-thumb banner-advs">
-                <img alt="'.esc_attr($post->post_name).'" title="'.esc_attr($post->post_name).'" src="' . esc_url($s7upf_image_blog) . '"/>
+                <img alt="'.esc_attr($post->post_name).'" title="'.esc_attr($post->post_name).'" src="' . esc_url($tech888fimage_blog) . '"/>
             </div>';
 }
 else{
@@ -16,8 +16,8 @@ else{
 }
 ?>
 <div class="content-single-blog <?php echo (is_sticky()) ? 'sticky':''?>">
-    <?php if(!empty($data)) echo apply_filters('s7upf_output_content',$data);?>
-    <?php if($check_meta == 'on') s7upf_display_metabox();?>
+    <?php if(!empty($data)) echo apply_filters('tech888foutput_content',$data);?>
+    <?php if($check_meta == 'on') tech888fdisplay_metabox();?>
     <div class="content-post-default">
         <h2 class="title24 font-bold">
             <?php the_title()?>

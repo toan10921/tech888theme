@@ -23,8 +23,8 @@ if (!empty($gallery)){
 ?>
 
 <div class="content-single-blog <?php echo (is_sticky()) ? 'sticky':''?>">
-    <?php if(!empty($data)) echo apply_filters('s7upf_output_content',$data);?>
-    <?php if($check_meta == 'on') s7upf_display_metabox();?>
+    <?php if(!empty($data)) echo apply_filters('tech888foutput_content',$data);?>
+    <?php if($check_meta == 'on') tech888fdisplay_metabox();?>
     <div class="content-post-default">
         <h2 class="title24 font-bold">
             <?php the_title()?>

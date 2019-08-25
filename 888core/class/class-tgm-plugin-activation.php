@@ -1175,7 +1175,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 
                 // As add_settings_error() wraps the final message in a <p> and as the final message can't be
                 // filtered, using <p>'s in our html would render invalid html output.
-                $line_template = '<span '.tech888f_add_html_attr('display: block; margin: 0.5em 0.5em 0 0; clear: both;').'>%s</span>' . "\n";
+                $line_template = '<span '.tech888fadd_html_attr('display: block; margin: 0.5em 0.5em 0 0; clear: both;').'>%s</span>' . "\n";
 
                 if ( ! current_user_can( 'activate_plugins' ) && ! current_user_can( 'install_plugins' ) && ! current_user_can( 'update_plugins' ) ) {
                     $rendered  = esc_html( $this->strings['notice_cannot_install_activate'] ) . ' ' . esc_html( $this->strings['contact_admin'] );
@@ -2057,7 +2057,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
          * @since 2.5.0
          */
         public function show_tgmpa_version() {
-            echo '<p '.s7upf_add_html_attr('float: right; padding: 0em 1.5em 0.5em 0;').'><strong><small>',
+            echo '<p '.tech888fadd_html_attr('float: right; padding: 0em 1.5em 0.5em 0;').'><strong><small>',
                 esc_html(
                     sprintf(
                         /* translators: %s: version number */
@@ -2569,7 +2569,7 @@ if ( ! class_exists( 'TGMPA_List_Table' ) ) {
                 }
 
                 $output[] = sprintf(
-                    '<p><span '.s7upf_add_html_attr('min-width: 32px; text-align: right; float: right;%1$s').'>%2$s</span>' . esc_html__( 'Installed version:', 'ripara' ) . '</p>',
+                    '<p><span '.tech888fadd_html_attr('min-width: 32px; text-align: right; float: right;%1$s').'>%2$s</span>' . esc_html__( 'Installed version:', 'ripara' ) . '</p>',
                     $color,
                     $installed
                 );
@@ -2577,7 +2577,7 @@ if ( ! class_exists( 'TGMPA_List_Table' ) ) {
 
             if ( ! empty( $item['minimum_version'] ) ) {
                 $output[] = sprintf(
-                    '<p><span '.s7upf_add_html_attr('min-width: 32px; text-align: right; float: right;%1$s').'>%1$s</span>' . esc_html__( 'Minimum required version:', 'ripara' ) . '</p>',
+                    '<p><span '.tech888fadd_html_attr('min-width: 32px; text-align: right; float: right;%1$s').'>%1$s</span>' . esc_html__( 'Minimum required version:', 'ripara' ) . '</p>',
                     $item['minimum_version']
                 );
             }
@@ -2589,7 +2589,7 @@ if ( ! class_exists( 'TGMPA_List_Table' ) ) {
                 }
 
                 $output[] = sprintf(
-                    '<p><span '.s7upf_add_html_attr('min-width: 32px; text-align: right; float: right;%1$s').'>%2$s</span>' . esc_html__( 'Available version:', 'ripara' ) . '</p>',
+                    '<p><span '.tech888fadd_html_attr('min-width: 32px; text-align: right; float: right;%1$s').'>%2$s</span>' . esc_html__( 'Available version:', 'ripara' ) . '</p>',
                     $color,
                     $item['available_version']
                 );
@@ -2959,8 +2959,8 @@ if ( ! class_exists( 'TGMPA_List_Table' ) ) {
 
                 // Wrap the install process with the appropriate HTML.
                 echo '<div class="tgmpa">',
-                    '<h2 '.s7upf_add_html_attr('font-size: 23px; font-weight: 400; line-height: 29px; margin: 0; padding: 9px 15px 4px 0;').'>', esc_html( get_admin_page_title() ), '</h2>
-                    <div class="update-php" '.s7upf_add_html_attr('width: 100%; height: 98%; min-height: 850px; padding-top: 1px;').'>';
+                    '<h2 '.tech888fadd_html_attr('font-size: 23px; font-weight: 400; line-height: 29px; margin: 0; padding: 9px 15px 4px 0;').'>', esc_html( get_admin_page_title() ), '</h2>
+                    <div class="update-php" '.tech888fadd_html_attr('width: 100%; height: 98%; min-height: 850px; padding-top: 1px;').'>';
 
                 // Process the bulk installation submissions.
                 add_filter( 'upgrader_source_selection', array( $this->tgmpa, 'maybe_adjust_source_dir' ), 1, 3 );

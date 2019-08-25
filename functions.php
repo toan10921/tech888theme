@@ -68,10 +68,22 @@ if(!function_exists('tech888f_intergrate_redux_framework')){
 
 /* CALL CONTROLLER */
 
+//load lib class
+require_once( trailingslashit( get_template_directory() ). '/888core/class/class-walker-megamenu.php' );
+require_once( trailingslashit( get_template_directory() ). '/888core/class/asset.php' );
+require_once( trailingslashit( get_template_directory() ). '/888core/class/class-tgm-plugin-activation.php' );
+require_once( trailingslashit( get_template_directory() ). '/888core/class/importer.php' );
+require_once( trailingslashit( get_template_directory() ). '/888core/class/class-menu-extra-page.php' );
+require_once( trailingslashit( get_template_directory() ). '/888core/class/class-order-comment-field.php' );
+require_once( trailingslashit( get_template_directory() ). '/888core/class/require-plugin.php' );
+require_once( trailingslashit( get_template_directory() ). '/888core/class/class-template.php' );
+
 require_once( trailingslashit( get_template_directory() ). '/888core/controller/Controller.php' );
 //nghien cuu 2 controller nay sau khi da co redux framework
 //require_once( trailingslashit( get_template_directory() ). '/888core/controller/Customize_Control.php' );
 //require_once( trailingslashit( get_template_directory() ). '/888core/controller/Metabox_Control.php' );
+
+
 
 //require_once( trailingslashit( get_template_directory() ). '/888core/controller/Option_Control.php' );
 require_once( trailingslashit( get_template_directory() ). '/888core/controller/VC-Controller.php' );
@@ -84,3 +96,8 @@ require_once( trailingslashit( get_template_directory() ). '/888core/controller/
 require_once( trailingslashit( get_template_directory() ). '/888core/controller/tpl-post-type/metabox/Metabox-Post-Controller.php' );
 
 /* END Call Controller */
+
+/* Call page builder */
+require_once(trailingslashit(get_template_directory()) . '888core/controller/element/index.php');
+
+

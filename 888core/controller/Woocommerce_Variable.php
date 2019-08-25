@@ -5,16 +5,16 @@ if(!class_exists('S7upf_Woocommerce_Attributes')){
             if (!class_exists('WC_Product')) return;
 
             //Add Type Attributes Woo
-            add_action( 'woocommerce_product_option_terms', array( __CLASS__, 's7upf_product_option_terms_attribute' ), 10, 2 );
+            add_action( 'woocommerce_product_option_terms', array( __CLASS__, 'tech888fproduct_option_terms_attribute' ), 10, 2 );
             if(is_admin()){
-                add_filter( 'product_attributes_type_selector', array( __CLASS__, 's7upf_add_attribute_types' ) );
-                add_action('admin_enqueue_scripts', array(__CLASS__, 's7upf_attributes_admin_scripts'));
-                add_action('admin_init', array(__CLASS__, 's7upf_init_attribute_hooks'));
-                add_action( 's7upf_product_attribute_field', array( __CLASS__, 's7upf_attribute_fields' ), 10, 3 );
+                add_filter( 'product_attributes_type_selector', array( __CLASS__, 'tech888fadd_attribute_types' ) );
+                add_action('admin_enqueue_scripts', array(__CLASS__, 'tech888fattributes_admin_scripts'));
+                add_action('admin_init', array(__CLASS__, 'tech888finit_attribute_hooks'));
+                add_action( 'tech888fproduct_attribute_field', array( __CLASS__, 'tech888fattribute_fields' ), 10, 3 );
             }
             //Font end attribute
-            add_filter( 'woocommerce_dropdown_variation_attribute_options_html', array( __CLASS__, 's7upf_get_swatch_html_attribute' ), 100, 2 );
-            add_filter( 's7upf_filters_swatch_html_attribute', array( __CLASS__, 's7upf_swatch_html_attribute' ), 5, 4 );
+            add_filter( 'woocommerce_dropdown_variation_attribute_options_html', array( __CLASS__, 'tech888fget_swatch_html_attribute' ), 100, 2 );
+            add_filter( 'tech888ffilters_swatch_html_attribute', array( __CLASS__, 'tech888fswatch_html_attribute' ), 5, 4 );
             // End Type Attributes Woo
 
         }
@@ -22,7 +22,7 @@ if(!class_exists('S7upf_Woocommerce_Attributes')){
         //-------- Begin Add Type Attributes------------//
 
         //Backend end attribute type color, image, label
-        static function s7upf_get_tax_attribute( $taxonomy ) {
+        static function tech888fget_tax_attribute( $taxonomy ) {
             global $wpdb;
 
             $attr = substr( $taxonomy, 3 );
@@ -31,7 +31,7 @@ if(!class_exists('S7upf_Woocommerce_Attributes')){
             
             return $attr;
         }
-        static function s7upf_product_option_terms_attribute( $taxonomy, $index ) {
+        static function tech888fproduct_option_terms_attribute( $taxonomy, $index ) {
             $types = array(
                 'color' => esc_html__( 'Color', 'ripara' ),
                 'image' => esc_html__( 'Image', 'ripara' ),
@@ -63,7 +63,7 @@ if(!class_exists('S7upf_Woocommerce_Attributes')){
 
             <?php
         }
-        static function s7upf_init_attribute_hooks() {
+        static function tech888finit_attribute_hooks() {
             $attribute_taxonomies = wc_get_attribute_taxonomies();
             if ( empty( $attribute_taxonomies ) ) {
                 return;
@@ -73,20 +73,20 @@ if(!class_exists('S7upf_Woocommerce_Attributes')){
                 add_action( 'pa_' . $tax->attribute_name . '_add_form_fields', array( __CLASS__, 's7up_add_attribute_fields' ) );
                 add_action( 'pa_' . $tax->attribute_name . '_edit_form_fields', array( __CLASS__, 's7up_edit_attribute_fields' ), 10, 2 );
             }
-            add_action( 'created_term', array( __CLASS__, 's7upf_save_term_meta_attribute' ), 10, 2 );
-            add_action( 'edit_term', array( __CLASS__, 's7upf_save_term_meta_attribute' ), 10, 2 );
+            add_action( 'created_term', array( __CLASS__, 'tech888fsave_term_meta_attribute' ), 10, 2 );
+            add_action( 'edit_term', array( __CLASS__, 'tech888fsave_term_meta_attribute' ), 10, 2 );
         }
         static function s7up_add_attribute_fields( $taxonomy ) {
-            $attr = S7upf_Woocommerce_Attributes::s7upf_get_tax_attribute( $taxonomy );
-            do_action( 's7upf_product_attribute_field', $attr->attribute_type, '', 'add' );
+            $attr = S7upf_Woocommerce_Attributes::tech888fget_tax_attribute( $taxonomy );
+            do_action( 'tech888fproduct_attribute_field', $attr->attribute_type, '', 'add' );
         }
         static function s7up_edit_attribute_fields( $term, $taxonomy ) {
-            $attr = S7upf_Woocommerce_Attributes::s7upf_get_tax_attribute( $taxonomy );
+            $attr = S7upf_Woocommerce_Attributes::tech888fget_tax_attribute( $taxonomy );
             $value = get_term_meta( $term->term_id, $attr->attribute_type, true );
 
-            do_action( 's7upf_product_attribute_field', $attr->attribute_type, $value, 'edit' );
+            do_action( 'tech888fproduct_attribute_field', $attr->attribute_type, $value, 'edit' );
         }
-        static function s7upf_attribute_fields( $type, $value, $form ) {
+        static function tech888fattribute_fields( $type, $value, $form ) {
             // Return if this is a default attribute type
             if ( in_array( $type, array( 'select', 'text' ) ) ) {
                 return;
@@ -133,7 +133,7 @@ if(!class_exists('S7upf_Woocommerce_Attributes')){
             // Print the close tag of field container
             echo 'edit' == $form ? '</td></tr>' : '</div>';
         }
-        static function s7upf_save_term_meta_attribute( $term_id, $tt_id ) {
+        static function tech888fsave_term_meta_attribute( $term_id, $tt_id ) {
             $types = array(
                 'color' => esc_html__( 'Color', 'ripara' ),
                 'image' => esc_html__( 'Image', 'ripara' ),
@@ -145,7 +145,7 @@ if(!class_exists('S7upf_Woocommerce_Attributes')){
                 }
             }
         }
-        static function s7upf_add_attribute_types($types) {
+        static function tech888fadd_attribute_types($types) {
             $add_type = array(
                 'color' => esc_html__( 'Color', 'ripara' ),
                 'image' => esc_html__( 'Image', 'ripara' ),
@@ -154,7 +154,7 @@ if(!class_exists('S7upf_Woocommerce_Attributes')){
             $types = array_merge( $types, $add_type);
             return $types;
         }
-        static function s7upf_attributes_admin_scripts(){
+        static function tech888fattributes_admin_scripts(){
             $screen = get_current_screen();
             if (strpos($screen->id, 'pa_') !== false) :
                 wp_enqueue_media();
@@ -164,13 +164,13 @@ if(!class_exists('S7upf_Woocommerce_Attributes')){
         }
 
         //Font end attribute type color, image, label
-        static function s7upf_get_swatch_html_attribute( $html, $args ) {
+        static function tech888fget_swatch_html_attribute( $html, $args ) {
             $swatch_types = array(
                 'color' => esc_html__( 'Color', 'ripara' ),
                 'image' => esc_html__( 'Image', 'ripara' ),
                 'label' => esc_html__( 'Label', 'ripara' ),
             );
-            $attr         = S7upf_Woocommerce_Attributes::s7upf_get_tax_attribute( $args['attribute'] );
+            $attr         = S7upf_Woocommerce_Attributes::tech888fget_tax_attribute( $args['attribute'] );
             // Return if this is normal attribute
             if ( empty( $attr ) ) {
                 return $html;
@@ -197,7 +197,7 @@ if(!class_exists('S7upf_Woocommerce_Attributes')){
 
                     foreach ( $terms as $term ) {
                         if ( in_array( $term->slug, $options ) ) {
-                            $swatches .= apply_filters( 's7upf_filters_swatch_html_attribute', '', $term, $attr, $args );
+                            $swatches .= apply_filters( 'tech888ffilters_swatch_html_attribute', '', $term, $attr, $args );
                         }
                     }
                 }
@@ -212,7 +212,7 @@ if(!class_exists('S7upf_Woocommerce_Attributes')){
 
             return $html;
         }
-        static function s7upf_swatch_html_attribute( $html, $term, $attr, $args ) {
+        static function tech888fswatch_html_attribute( $html, $term, $attr, $args ) {
             $selected = sanitize_title( $args['selected'] ) == $term->slug ? 'selected' : '';
             $name     = esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name ) );
 
@@ -222,7 +222,7 @@ if(!class_exists('S7upf_Woocommerce_Attributes')){
                     $color = get_term_meta( $term->term_id, 'color', true );
                     if($color == '#fff' || $color == '#ffffff') $class_white = 'white-color';
                     $html = sprintf(
-                        '<span class="swatch swatch-color '.$class_white.' swatch-%s %s" '.s7upf_add_html_attr('background-color:'.$color).' title="%s" data-value="%s"><span class="hide">%s</span></span>',
+                        '<span class="swatch swatch-color '.$class_white.' swatch-%s %s" '.tech888fadd_html_attr('background-color:'.$color).' title="%s" data-value="%s"><span class="hide">%s</span></span>',
                         esc_attr( $term->slug ),
                         $selected,
                         esc_attr( $name ),

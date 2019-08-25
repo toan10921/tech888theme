@@ -17,6 +17,6 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<?php //s7upf_preload();?>
+<?php //tech888fpreload();?>
 <div class="wrap">
 <?php echo tech888f_get_template('header-default');

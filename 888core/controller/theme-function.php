@@ -11,7 +11,12 @@ if (!function_exists('tech888f_get_opt')) {
     function tech888f_get_opt($id,$args = null)
     {
         global $tech888f_option;
-        return $tech888f_option[$id];
+        if(!empty($tech888f_option[$id])){
+            return $tech888f_option[$id];
+        }
+        else{
+            return null;
+        }
     }
 }
 
@@ -36,31 +41,6 @@ if (!function_exists('tech888f_get_theme_option_sub_section')) {
             $sub_section = tech888f_get_theme_option_template($view_name);
         }
         return $sub_section;
-    }
-}
-
-if (!function_exists('tech888f_get_template')) {
-    function tech888f_get_template($view_name, $slug = false, $data = array(), $echo = false)
-    {
-        $html = Tech888f_Template::load_template_view($view_name, $slug, $data, $echo);
-        if (!$echo) return $html;
-    }
-}
-
-if (!function_exists('tech888f_get_template_post')) {
-    function tech888f_get_template_post($view_name, $slug = false, $data = array(), $echo = FALSE)
-    {
-        $view_name = 'blog/' . $view_name;
-        $html = Tech888f_Template::load_template_view($view_name, $slug, $data, $echo);
-        if (!$echo) return $html;
-    }
-}
-
-if (!function_exists('tech888f_get_theme_option_template')) {
-    function tech888f_get_theme_option_template($view_name, $echo = false)
-    {
-        $sub_section = Tech888f_Template::load_them_option_data($view_name, $echo);
-        if (!$echo) return $sub_section;
     }
 }
 
@@ -134,7 +114,7 @@ if (!function_exists('tech888f_get_post_grid_specific')) {
     function tech888f_get_post_grid_specific($style = 'element')
     {
         $list = apply_filters('tech888f_get_post_grid_specific', array(
-            '' => esc_html__('Default', 'ripara'),
+            'default' => esc_html__('Default', 'ripara'),
             'style2' => esc_html__('Post grid #2', 'ripara'),
             'style3' => esc_html__('Post grid #3', 'ripara'),
             'related' => esc_html__('Post grid Related', 'ripara'),
@@ -302,7 +282,7 @@ if(!function_exists('tech888f_display_metabox')){
                     $cats = get_the_category_list(' ');
                     if($cats):?>
                         <li><i class="fa fa-folder-open gray" aria-hidden="true"></i>
-                            <?php echo apply_filters('s7upf_output_content',$cats);?>
+                            <?php echo apply_filters('tech888foutput_content',$cats);?>
                         </li>
                     <?php endif;?>
                     <?php
@@ -310,7 +290,7 @@ if(!function_exists('tech888f_display_metabox')){
                     if($tags):?>
                         <li><i class="fa fa-tags gray" aria-hidden="true"></i>
                             <?php $tags = get_the_tag_list(' ',' ',' ');?>
-                            <?php if($tags) echo apply_filters('s7upf_output_content',$tags); else esc_html_e("No Tag",'7upframework');?>
+                            <?php if($tags) echo apply_filters('tech888foutput_content',$tags); else esc_html_e("No Tag",'7upframework');?>
                         </li>
                     <?php endif;?>
                 </ul>
@@ -513,3 +493,354 @@ if(!function_exists('tech888f_get_current_id')){
     }
 }
 
+// load icon lib
+
+if(!function_exists('tech888f_default_icon_lib')){
+    function tech888f_default_icon_lib(){
+        $lib = tech888f_get_opt('tech888f_icon_lib','fontawesome');
+        return $lib;
+    }
+}
+
+//get roles wp
+if(!function_exists('tech888f_get_list_role')){
+    function tech888f_get_list_role(){
+        global $wp_roles;
+        $roles = array();
+        if(isset($wp_roles->roles)){
+            $roles_data = $wp_roles->roles;
+            if(is_array($roles_data)){
+                foreach ($roles_data as $key => $value) {
+                    $roles[$value['name']] = $key;
+                }
+            }
+        }
+        return $roles;
+    }
+}
+if(!function_exists('tech888f_get_post_style')){
+    function tech888f_get_post_style($style = 'element'){
+        $list = apply_filters('tech888f_post_item_style',array(
+            esc_html__('Default','mptheme')      => 'default',
+            esc_html__('Post grid 2','mptheme')      => 'style2',
+            esc_html__('Post grid 3','mptheme')      => 'style3',
+            esc_html__('Post grid 4','mptheme')      => 'style4',
+            esc_html__('Post grid 5','mptheme')      => 'style5',
+            esc_html__('Post Flex 1','mptheme')      => 'flex1',
+        ));
+        if($style != 'element'){
+            $temp = array();
+            foreach ($list as $key => $value) {
+                $temp[] =   array(
+                    'value' => $value,
+                    'label' => $key,
+                );
+            }
+            $list = $temp;
+        }
+        return $list;
+    }
+}
+if(!function_exists('tech888f_get_post_list_style')){
+    function tech888f_get_post_list_style($style = 'element'){
+        $list = apply_filters('tech888f_post_list_item_style',array(
+            esc_html__('Default','mptheme')      => '',
+            esc_html__('Post list 1','mptheme')      => 'style1',
+            esc_html__('Post list 2','mptheme')      => 'style2',
+        ));
+        if($style != 'element'){
+            $temp = array();
+            foreach ($list as $key => $value) {
+                $temp[] =   array(
+                    'value' => $value,
+                    'label' => $key,
+                );
+            }
+            $list = $temp;
+        }
+        return $list;
+    }
+}
+// get list taxonomy
+if(!function_exists('tech888f_list_taxonomy'))
+{
+    function tech888f_list_taxonomy($taxonomy,$show_all = true)
+    {
+        if($show_all) $list = array( esc_html__('--Select--','mptheme') => '' );
+        else $list = array();
+        if(!isset($taxonomy) || empty($taxonomy)) $taxonomy = 'category';
+        $tags = get_terms($taxonomy);
+        if(is_array($tags) && !empty($tags)){
+            foreach ($tags as $tag) {
+                $list[$tag->name] = $tag->slug;
+            }
+        }
+        return $list;
+    }
+}
+
+//Get order list
+if(!function_exists('tech888f_get_order_list')){
+    function tech888f_get_order_list($current=false,$extra=array(),$return='array'){
+        $default = array(
+            esc_html__('None','mptheme')               => 'none',
+            esc_html__('ID','mptheme')                 => 'ID',
+            esc_html__('Author','mptheme')             => 'author',
+            esc_html__('Title','mptheme')              => 'title',
+            esc_html__('Name','mptheme')               => 'name',
+            esc_html__('Date','mptheme')               => 'date',
+            esc_html__('Last Modified Date','mptheme') => 'modified',
+            esc_html__('Post Parent','mptheme')        => 'parent',
+        );
+
+        if(!empty($extra) and is_array($extra))
+        {
+            $default=array_merge($default,$extra);
+        }
+
+        if($return=="array")
+        {
+            return $default;
+        }elseif($return=='option')
+        {
+            $html='';
+            if(!empty($default)){
+                foreach($default as $key=>$value){
+                    $selected=selected($key,$current,false);
+                    $html.="<option {$selected} value='{$value}'>{$key}</option>";
+                }
+            }
+            return $html;
+        }
+    }
+}
+//Get all page
+if(!function_exists('tech888f_list_all_page')){
+    function tech888f_list_all_page($complete = false){
+        global $post;
+        if(!$complete){
+            $page_list = array(
+                esc_html__('-- Choose One --','mptheme') => '',
+            );
+        }
+        else $page_list = array();
+        $pages = get_pages();
+        foreach ($pages as $page) {
+            if(!$complete) $page_list[$page->post_title] = $page->ID;
+            else{
+                $page_list[] = array(
+                    'value' => $page->ID,
+                    'label' => $page->post_title,
+                );
+            }
+        }
+        return $page_list;
+    }
+}
+// Get list menu
+if(!function_exists('tech888f_list_menu_name')){
+    function tech888f_list_menu_name(){
+        $menu_nav = wp_get_nav_menus();
+        $menu_list = array('Default' => '');
+        if(is_array($menu_nav) && !empty($menu_nav)){
+            foreach($menu_nav as $item){
+                if(is_object($item)){
+                    $menu_list[$item->name] = $item->slug;
+                }
+            }
+        }
+        return $menu_list;
+    }
+}
+if(!function_exists('tech888f_get_list_taxonomy')){
+    function tech888f_get_list_taxonomy($taxonomy = 'product_cat') {
+        $result = array();
+        $tags = get_terms($taxonomy);
+        if(is_array($tags) && !empty($tags)){
+            foreach ($tags as $tag) {
+                $list[$tag->name] = $tag->slug;
+                $result[] = array(
+                    'value' => $tag->slug,
+                    'label' => $tag->name,
+                );
+            }
+        }
+        return $result;
+    }
+}
+if(!function_exists('tech888f_get_portfolio_style')){
+    function tech888f_get_portfolio_style($style = 'element'){
+        $list = apply_filters('tech888f_portfolio_item_style',array(
+            esc_html__('Default','mptheme')      => '',
+            esc_html__('Portfolio flex','mptheme')      => 'flex',
+        ));
+        if($style != 'element'){
+            $temp = array();
+            foreach ($list as $key => $value) {
+                $temp[] =   array(
+                    'value' => $value,
+                    'label' => $key,
+                );
+            }
+            $list = $temp;
+        }
+        return $list;
+    }
+}
+if(!function_exists('tech888f_get_product_style')){
+    function tech888f_get_product_style($style = 'element'){
+        $list = apply_filters('tech888f_product_item_style',array(
+            esc_html__('Default','mptheme')      => '',
+            esc_html__('Product grid 2','mptheme')      => 'style2',
+            esc_html__('Product grid 3','mptheme')      => 'style3',
+            esc_html__('Product grid 4','mptheme')      => 'style4',
+            esc_html__('Product grid 5','mptheme')      => 'style5',
+        ));
+        if($style != 'element'){
+            $temp = array();
+            foreach ($list as $key => $value) {
+                $temp[] =   array(
+                    'value' => $value,
+                    'label' => $key,
+                );
+            }
+            $list = $temp;
+        }
+        return $list;
+    }
+}
+if(!function_exists('tech888f_get_product_list_style')){
+    function tech888f_get_product_list_style($style = 'element'){
+        $list = apply_filters('tech888f_product_list_item_style',array(
+            esc_html__('Default','mptheme')      => '',
+            esc_html__('Product list 2','mptheme')      => 'style2',
+        ));
+        if($style != 'element'){
+            $temp = array();
+            foreach ($list as $key => $value) {
+                $temp[] =   array(
+                    'value' => $value,
+                    'label' => $key,
+                );
+            }
+            $list = $temp;
+        }
+        return $list;
+    }
+}
+if(!function_exists('tech888f_get_list_attribute')){
+    function tech888f_get_list_attribute() {
+        $result = array();
+        $attributes = wc_get_attribute_taxonomies();
+        if(!empty($attributes)){
+            foreach ($attributes as $attribute) {
+                $result[$attribute->attribute_label] = $attribute->attribute_name;
+            }
+        }
+        return $result;
+    }
+}
+if(!function_exists('tech888f_get_sidebar_list')){
+    function tech888f_get_sidebar_list(){
+        global $wp_registered_sidebars;
+        $sidebars = array(
+            esc_html__('--Select--','mptheme') => ''
+        );
+        foreach( $wp_registered_sidebars as $id=>$sidebar ) {
+            $sidebars[ $sidebar[ 'name' ] ] = $id;
+        }
+        return $sidebars;
+    }
+}
+
+if(!function_exists('tech888f_get_responsive_default_atts')){
+    function tech888f_get_responsive_default_atts(){
+        $default = array(
+            'bb_tab_container' =>  '',
+            'tech888f_x_large_css' =>  '',
+            'tech888f_x_large_csstypo' =>  '',
+            'tech888f_x_large_cssshow_hide' =>  'yes',
+            'tech888f_large_css' =>  '',
+            'tech888f_large_csstypo' =>  '',
+            'tech888f_large_cssshow_hide' =>  'yes',
+            'tech888f_medium_css' =>  '',
+            'tech888f_medium_csstypo' =>  '',
+            'tech888f_medium_cssshow_hide' =>  'yes',
+            'tech888f_small_css' =>  '',
+            'tech888f_small_csstypo' =>  '',
+            'tech888f_small_cssshow_hide' =>  'yes',
+            'tech888f_s_small_css' =>  '',
+            'tech888f_s_small_csstypo' =>  '',
+            'tech888f_s_small_cssshow_hide' =>  'yes',
+        );
+        return apply_filters('tech888f_responsive_default_atts',$default);
+    }
+}
+
+
+if (!function_exists('tech888f_get_template')) {
+    function tech888f_get_template($view_name, $slug = false, $data = array(), $echo = false)
+    {
+        $html = Tech888f_Template::load_template_view($view_name, $slug, $data, $echo);
+        if (!$echo) return $html;
+    }
+}
+
+if (!function_exists('tech888f_get_template_post')) {
+    function tech888f_get_template_post($view_name, $slug = false, $data = array(), $echo = FALSE)
+    {
+        $view_name = 'blog/' . $view_name;
+        $html = Tech888f_Template::load_template_view($view_name, $slug, $data, $echo);
+        if (!$echo) return $html;
+    }
+}
+if(!function_exists('tech888f_get_template_portfolio')){
+    function tech888f_get_template_portfolio( $view_name,$slug=false,$data=array(),$echo=FALSE ){
+        $view_name = 'portfolios/'.$view_name;
+        $html = Tech888f_Template::load_template_view($view_name,$slug,$data,$echo);
+        if(!$echo) return $html;
+    }
+}
+if(!function_exists('tech888f_get_template_element')){
+    function tech888f_get_template_element( $view_name,$slug=false,$data=array(),$echo=FALSE ){
+        $view_name = 'elements/'.$view_name;
+        $html = Tech888f_Template::load_template_view($view_name,$slug,$data,$echo);
+        if(!$echo) return $html;
+    }
+}
+if(!function_exists('tech888f_get_template_product')){
+    function tech888f_get_template_product( $view_name,$slug=false,$data=array(),$echo=FALSE ){
+        $view_name = 'products/'.$view_name;
+        $html = Tech888f_Template::load_template_view($view_name,$slug,$data,$echo);
+        if(!$echo) return $html;
+    }
+}
+if(!function_exists('tech888f_get_template_portfolio')){
+    function tech888f_get_template_portfolio( $view_name,$slug=false,$data=array(),$echo=FALSE ){
+        $view_name = 'portfolios/'.$view_name;
+        $html = Tech888f_Template::load_template_view($view_name,$slug,$data,$echo);
+        if(!$echo) return $html;
+    }
+}
+if(!function_exists('tech888f_get_template_woocommerce')){
+    function tech888f_get_template_woocommerce( $view_name,$slug=false,$data=array(),$echo=FALSE ){
+        $view_name = 'woocommerce/'.$view_name;
+        $html = Tech888f_Template::load_template_view($view_name,$slug,$data,$echo);
+        if(!$echo) return $html;
+    }
+}
+if(!function_exists('tech888f_get_template_widget')){
+    function tech888f_get_template_widget( $view_name,$slug=false,$data=array(),$echo=FALSE ){
+        $view_name = 'widgets/'.$view_name;
+        $html = Tech888f_Template::load_template_view($view_name,$slug,$data,$echo);
+        if(!$echo) return $html;
+    }
+}
+
+if (!function_exists('tech888f_get_theme_option_template')) {
+    function tech888f_get_theme_option_template($view_name, $echo = false)
+    {
+        $sub_section = Tech888f_Template::load_them_option_data($view_name, $echo);
+        if (!$echo) return $sub_section;
+    }
+}
