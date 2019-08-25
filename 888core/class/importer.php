@@ -48,7 +48,7 @@ if(class_exists('Tech888f_PluginsImporter') and !class_exists('Tech888f_Importer
                     $data_option= $tech888f_config['import_theme_option'];
                     if(!empty($data_option)){
                         $options=json_decode($data_option,true); // unserialize
-                        if(!function_exists('tech888f_get_option_name'))
+                        if(!function_exists('tech888f_get_opt_name'))
                         {
                             echo json_encode( array(
                                     'status'   =>0,
@@ -58,7 +58,7 @@ if(class_exists('Tech888f_PluginsImporter') and !class_exists('Tech888f_Importer
                             );
                             die;
                         }
-                        update_option( tech888f_get_option_name(), $options ); // and overwrite the current theme-options
+                        update_option( tech888f_get_opt_name(), $options ); // and overwrite the current theme-options
                         echo json_encode( array(
                                 'status'   =>"ok",
                                 'messenger'=>esc_html__("Importing the demo theme options...","7upframework")."<span>".esc_html__("DONE!","7upframework")."</span><br>",

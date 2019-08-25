@@ -23,14 +23,14 @@ global $product;
 if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
-$style          = tech888f_get_option('shop_default_style','grid');
-$grid_type      = tech888f_get_option('shop_grid_type');
-$item_style     = tech888f_get_option('shop_grid_item_style');
-$item_style_list= tech888f_get_option('shop_list_item_style');
-$column         = tech888f_get_option('shop_grid_column',4);
-$size           = tech888f_get_option('shop_grid_size');
-$size_list      = tech888f_get_option('shop_list_size');
-$animation      = tech888f_get_option('shop_thumb_animation');
+$style          = tech888f_get_opt('shop_default_style','grid');
+$grid_type      = tech888f_get_opt('shop_grid_type');
+$item_style     = tech888f_get_opt('shop_grid_item_style');
+$item_style_list= tech888f_get_opt('shop_list_item_style');
+$column         = tech888f_get_opt('shop_grid_column',4);
+$size           = tech888f_get_opt('shop_grid_size');
+$size_list      = tech888f_get_opt('shop_list_size');
+$animation      = tech888f_get_opt('shop_thumb_animation');
 if(isset($_GET['type'])) $style = sanitize_text_field($_GET['type']);
 $size = tech888f_get_size_crop($size);
 $size_list = tech888f_get_size_crop($size_list);

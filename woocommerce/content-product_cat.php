@@ -18,7 +18,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-$column         = tech888f_get_option('shop_grid_column',4);
+$column         = tech888f_get_opt('shop_grid_column',4);
 $col_class = ' list-col-item list-'.esc_attr($column).'-item';
 ?>
 <div <?php wc_product_cat_class( $col_class, $category ); ?>>
