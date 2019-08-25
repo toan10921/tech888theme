@@ -121,7 +121,6 @@ if (!function_exists('s7upf_update_product')) {
         }
     }
 }
-
 if (!function_exists('s7upf_create_products')) {
     function s7upf_create_products($name = array(), $number = 10, $post_type = 'product', $content = '', $excerpt = '')
     {
@@ -191,7 +190,6 @@ if (!function_exists('s7upf_create_products')) {
         }
     }
 }
-
 if (!function_exists('tech888f_delele_media')){
     function tech888f_delele_media(){
         if (isset($_GET['del_media'])){
@@ -213,7 +211,6 @@ if (!function_exists('tech888f_delele_media')){
         }
     }
 }
-
 if(!function_exists('tech88f_delete_products')){
     function tech88f_delete_products(){
         if (isset($_GET['del_product'])){
@@ -251,7 +248,7 @@ if(!function_exists('tech88f_delete_media_attachment')){
 //id image post mptheme
 
 $ids = array(24176);
-//$ids_prd = array(24030,24029,24028,24027);
+$ids_prd = array(2394,2395,2396,2397,2398,2398,2400,2401,2402,2403,2404);
 //$ids_portfolio = array(1639,1640,1641,1642,1643);
 //$ids_prd_gallery = array(959,960,961,962,963,964,965,966,967,968,969,970,971,972,973,974,975,976,977,978,979,980,981,982,983,984,985);
 //$tags = array("headphone", "audio device", "music accessories", "Prestige Series", "In-Ear Series", "Wireless");
@@ -278,49 +275,18 @@ $ids = array(24176);
 $name = array(
     "Accessories" => array(
         "Cáp sạc Earldom 3in1 IMC 017 – PK225",
-        "Cáp sạc Earldom 3in1 IMC 017 – PK225",
-        "Cáp sạc Earldom 3in1 IMC 017 – PK225",
-        "Cáp sạc Earldom 3in1 IMC 017 – PK225",
-        "Cáp sạc Earldom 3in1 IMC 017 – PK225",
-        "Cáp sạc Earldom 3in1 IMC 017 – PK225",
-        "Cáp sạc Earldom 3in1 IMC 017 – PK225",
-        "Cáp sạc Earldom 3in1 IMC 017 – PK225",
-        "Cáp sạc Earldom 3in1 IMC 017 – PK225",
-        "Cáp sạc Earldom 3in1 IMC 017 – PK225",
     ),
 );
-/*$prd_name = array(
+$prd_name = array(
     "Reference Series" => array(
         "Beoplay A1",
-        "Beoplay M3",
-        "Beoplay E8 Motion",
-        "Beoplay A1",
-        "Beoplay M3",
-        "Beoplay E8 Motion",
-        "Beoplay A1",
-        "Beoplay M3",
-        "Beoplay E8 Motion",
-        "Beoplay A1",
-        "Beoplay M3",
-        "Beoplay E8 Motion",
     ),
 );
 $portfolio_name = array(
     "Project" => array(
         "E8 Motion",
-        "E6 Motion",
-        "Urban Nature",
-        "Calm, Cool, Collected",
-        "A home in harmony",
-        "E8 Motion",
-        "E6 Motion",
-        "Urban Nature",
-        "Calm, Cool, Collected",
-        "A home in harmony",
-        "E8 Motion",
-        "E6 Motion",
     ),
-);*/
+);
 $number = 10; //number product each category
 //s7upf_create_products($name,$number);
 $content_post = '';
@@ -348,7 +314,7 @@ $excerpt_portfolio = 'Aliquam hendrerit a augue in suscipit. Pellentesque id era
 
 // update product mptheme
 
-//s7upf_update_product('thumbnail',$ids_prd,'product','');
+s7upf_update_product('thumbnail',$ids_prd,'product','');
 //s7upf_update_product('thumb_hover',$ids_prd,'product','');
 //s7upf_update_product('gallery',$ids_prd_gallery,'product','');
 //s7upf_update_product('excerpt',$excerpt_post,'product','');
@@ -365,5 +331,5 @@ $excerpt_portfolio = 'Aliquam hendrerit a augue in suscipit. Pellentesque id era
 //s7upf_update_product('gallery',$ids_portfolio,'portfolio','');
 
 //tech88f_delete_products();
-tech888f_delele_media();
+//tech888f_delele_media();
 get_footer();
