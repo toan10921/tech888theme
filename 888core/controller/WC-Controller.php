@@ -128,8 +128,6 @@ if(class_exists("woocommerce")){
     remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
     remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
     remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10 );
-
-    add_action('woocommerce_single_product_summary','tech888f_get_stock_status',10);
     add_action( 'woocommerce_single_product_summary','woocommerce_template_single_price',5 );
     add_action( 'woocommerce_after_single_product_summary', 'tech888f_product_tabs_before', 5 );
     add_action( 'woocommerce_after_single_product_summary', 'tech888f_product_tabs', 10 );
@@ -902,21 +900,21 @@ if(class_exists("woocommerce")){
     }
     if(!function_exists('tech888f_product_tabs')){
         function tech888f_product_tabs(){
-            $tab_style = tech888f_get_value_by_id('product_tab_detail');
+            $tab_style = tech888f_get_opt('product_tab_detail');
             tech888f_get_template_woocommerce('single-product/tabs','',false,true);
         }
     }
 
     if(!function_exists('tech888f_product_tabs_before')){
         function tech888f_product_tabs_before(){            
-            $page_id = tech888f_get_value_by_id('before_append_tab');
+            $page_id = tech888f_get_opt('before_append_tab');
             if(!empty($page_id)) echo '<div class="content-append-before-tab">'.tech888f_Template::get_vc_pagecontent($page_id).'</div>';
         }
     }    
 
     if(!function_exists('tech888f_product_tabs_after')){
         function tech888f_product_tabs_after(){            
-            $page_id = tech888f_get_value_by_id('after_append_tab');
+            $page_id = tech888f_get_opt('after_append_tab');
             if(!empty($page_id)) echo '<div class="content-append-after-tab">'.tech888f_Template::get_vc_pagecontent($page_id).'</div>';
         }
     }
