@@ -94,6 +94,7 @@ require_once( trailingslashit( get_template_directory() ). '/888core/controller/
 require_once( trailingslashit( get_template_directory() ). '/888core/controller/tpl-post-type/Footer-Controller.php' );
 require_once( trailingslashit( get_template_directory() ). '/888core/controller/tpl-post-type/ExtraPage-Controller.php' );
 require_once( trailingslashit( get_template_directory() ). '/888core/controller/tpl-post-type/metabox/Metabox-Post-Controller.php' );
+require_once( trailingslashit( get_template_directory() ). '/888core/controller/tpl-post-type/metabox/Metabox-Page-Controller.php' );
 
 /* END Call Controller */
 
