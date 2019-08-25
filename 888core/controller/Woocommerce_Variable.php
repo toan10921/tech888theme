@@ -7,7 +7,7 @@ if(!class_exists('S7upf_Woocommerce_Attributes')){
             //Add Type Attributes Woo
             add_action( 'woocommerce_product_option_terms', array( __CLASS__, 'tech888fproduct_option_terms_attribute' ), 10, 2 );
             if(is_admin()){
-                add_filter( 'product_attributes_type_selector', array( __CLASS__, 'tech888fadd_attribute_types' ) );
+                add_filter( 'product_attributes_type_selector', array( __CLASS__, 'tech888f_add_attribute_types' ) );
                 add_action('admin_enqueue_scripts', array(__CLASS__, 'tech888fattributes_admin_scripts'));
                 add_action('admin_init', array(__CLASS__, 'tech888finit_attribute_hooks'));
                 add_action( 'tech888fproduct_attribute_field', array( __CLASS__, 'tech888fattribute_fields' ), 10, 3 );
@@ -145,7 +145,7 @@ if(!class_exists('S7upf_Woocommerce_Attributes')){
                 }
             }
         }
-        static function tech888fadd_attribute_types($types) {
+        static function tech888f_add_attribute_types($types) {
             $add_type = array(
                 'color' => esc_html__( 'Color', 'ripara' ),
                 'image' => esc_html__( 'Image', 'ripara' ),
@@ -222,7 +222,7 @@ if(!class_exists('S7upf_Woocommerce_Attributes')){
                     $color = get_term_meta( $term->term_id, 'color', true );
                     if($color == '#fff' || $color == '#ffffff') $class_white = 'white-color';
                     $html = sprintf(
-                        '<span class="swatch swatch-color '.$class_white.' swatch-%s %s" '.tech888fadd_html_attr('background-color:'.$color).' title="%s" data-value="%s"><span class="hide">%s</span></span>',
+                        '<span class="swatch swatch-color '.$class_white.' swatch-%s %s" '.tech888f_add_html_attr('background-color:'.$color).' title="%s" data-value="%s"><span class="hide">%s</span></span>',
                         esc_attr( $term->slug ),
                         $selected,
                         esc_attr( $name ),
