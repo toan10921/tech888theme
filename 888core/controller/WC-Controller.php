@@ -223,7 +223,7 @@ if(class_exists("woocommerce")){
             if(isset($_GET['type'])) $style = $_GET['type'];
             // data shop ajax
             $attr_ajax = array(
-                'item_style'    => tech888f_get_opt('shop_grid_item_style'),
+                'item_style'    => tech888f_get_opt('shop_grid_item_style',''),
                 'item_style_list'=> tech888f_get_opt('shop_list_item_style'),
                 'column'        => tech888f_get_opt('shop_grid_column'),
                 'size'          => tech888f_get_opt('shop_grid_size'),

@@ -753,6 +753,8 @@ if(!function_exists('tech888f_get_sidebar_list')){
     }
 }
 
+//responsive option page builder
+
 if(!function_exists('tech888f_get_responsive_default_atts')){
     function tech888f_get_responsive_default_atts(){
         $default = array(
@@ -777,6 +779,7 @@ if(!function_exists('tech888f_get_responsive_default_atts')){
     }
 }
 
+/* get template section */
 
 if (!function_exists('tech888f_get_template')) {
     function tech888f_get_template($view_name, $slug = false, $data = array(), $echo = false)
@@ -785,7 +788,6 @@ if (!function_exists('tech888f_get_template')) {
         if (!$echo) return $html;
     }
 }
-
 if (!function_exists('tech888f_get_template_post')) {
     function tech888f_get_template_post($view_name, $slug = false, $data = array(), $echo = FALSE)
     {
@@ -842,5 +844,31 @@ if (!function_exists('tech888f_get_theme_option_template')) {
     {
         $sub_section = Tech888f_Template::load_them_option_data($view_name, $echo);
         if (!$echo) return $sub_section;
+    }
+}
+
+// theme library function
+
+// cropsize format '100x100'
+
+if(!function_exists('tech888f_get_size_crop')){
+    function tech888f_get_size_crop($size='',$default=''){
+        if(!empty($size) && strpos($size, 'x')){
+            $size = str_replace('|', 'x', $size);
+            $size = str_replace(',', 'x', $size);
+            $size = explode('x', $size);
+        }
+        if(empty($size) && !empty($default)) $size = $default;
+        return $size;
+    }
+}
+
+//Set post view
+if(!function_exists('tech888f_set_post_view')){
+    function tech888f_set_post_view($post_id=false){
+        if(!$post_id) $post_id=get_the_ID();
+        $view=(int)get_post_meta($post_id,'post_views',true);
+        $view++;
+        update_post_meta($post_id,'post_views',$view);
     }
 }
