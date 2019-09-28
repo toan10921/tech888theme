@@ -131,17 +131,17 @@ if(class_exists("woocommerce")){
     add_action( 'woocommerce_single_product_summary','woocommerce_template_single_price',5 );
     add_action( 'woocommerce_after_single_product_summary', 'tech888f_product_tabs_before', 5 );
     add_action( 'woocommerce_after_single_product_summary', 'tech888f_product_tabs', 10 );
-    add_action( 'woocommerce_after_single_product_summary', 'tech888f_product_tabs_after', 15 ); 
-    add_action( 'woocommerce_after_single_product_summary', 'tech888f_single_upsell_product', 15 );
-    //add_action( 'woocommerce_after_single_product_summary', 'tech888f_single_relate_product', 20 );
-    add_action( 'woocommerce_after_single_product_summary', 'tech888f_single_lastest_product', 25 );
+    add_action( 'woocommerce_after_single_product_summary', 'tech888f_product_tabs_after', 15 );
+    add_action( 'woocommerce_after_single_product_summary', 'tech888f_single_upsell_product', 20 );
+    add_action( 'woocommerce_after_single_product_summary', 'tech888f_single_relate_product', 25 );
+    add_action( 'woocommerce_after_single_product_summary', 'tech888f_single_lastest_product', 30 );
     add_filter( 'woocommerce_short_description', 'tech888f_custom_short_description', 10 );
     add_filter( 'woocommerce_product_tabs', 'tech888f_custom_product_tab', 98 );
     // End Remove action single product
 
     add_action( 'woocommerce_before_main_content','tech888f_woocommerce_wrap_before', 10 );
     add_action( 'woocommerce_after_main_content', 'tech888f_woocommerce_wrap_after', 10 );
-    add_action( 'woocommerce_after_main_content', 'tech888f_single_relate_product', 20 );
+    //add_action( 'woocommerce_after_main_content', 'tech888f_single_relate_product', 20 );
     add_filter( 'woocommerce_show_page_title', 'tech888f_remove_page_title' );
     add_action( 'woocommerce_before_shop_loop', 'tech888f_woocommerce_top_filter', 25 );    
     add_action( 'woocommerce_before_shop_loop', 'tech888f_shop_wrap_before', 30 ); 
@@ -869,7 +869,7 @@ if(class_exists("woocommerce")){
         }
     }
     if(!function_exists('tech888f_single_relate_product')){
-        function tech888f_single_relate_product($style=''){            
+        function tech888f_single_relate_product($style=''){
             if(is_product()){
                 tech888f_get_template_woocommerce('single-product/related','',false,true);
             }
@@ -878,9 +878,9 @@ if(class_exists("woocommerce")){
 
     if(!function_exists('tech888f_show_single_product_data')){
         function tech888f_show_single_product_data(){
-            $show_latest     = tech888f_get_opt('show_latest');
-            $show_upsell     = tech888f_get_opt('show_upsell','on');
-            $show_related    = tech888f_get_opt('show_related','on');
+            $show_latest     = tech888f_get_opt('tech888f_product_latest_prd_stats','0');
+            $show_upsell     = tech888f_get_opt('tech888f_product_upsell_prd_stats','0');
+            $show_related    = tech888f_get_opt('tech888f_product_related_prd_stats','1');
             $number     = tech888f_get_opt('show_single_number');
             $size       = tech888f_get_opt('show_single_size');
             $item_res   = tech888f_get_opt('show_single_itemres','0:1,480:2,990:3,1200:4');

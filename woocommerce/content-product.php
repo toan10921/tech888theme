@@ -23,10 +23,11 @@ global $product;
 if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
-$style          = tech888f_get_opt('shop_default_style','grid');
-$grid_type      = tech888f_get_opt('shop_grid_type');
-$item_style     = tech888f_get_opt('shop_grid_item_style');
-$item_style_list= tech888f_get_opt('shop_list_item_style');
+$style          = tech888f_get_opt('tech888f_shop_default_style','grid');
+var_dump($style);
+$grid_type      = tech888f_get_opt('tech888f_shop_grid_item_specific');
+$item_style     = tech888f_get_opt('');
+$item_style_list= tech888f_get_opt('');
 $column         = tech888f_get_opt('shop_grid_column',4);
 $size           = tech888f_get_opt('shop_grid_size');
 $size_list      = tech888f_get_opt('shop_list_size');

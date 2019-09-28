@@ -65,7 +65,7 @@ foreach ( $attachment_ids as $attachment_id ) {
         </div>
         <div class="<?php echo esc_attr($info_class)?>">
             <div class="summary entry-summary detail-info">
-                <h2 class="product-title title24"><?php the_title()?></h2>
+                <h2 class="product-title title24 no-margin"><?php the_title()?></h2>
                 <?php
                     do_action( 'woocommerce_single_product_summary' );
                 ?>

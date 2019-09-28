@@ -311,7 +311,7 @@ if (!function_exists('tech888f_set_main_class')) {
         //default template
         if ($sidebar_pos != 'no' && is_active_sidebar($sidebar['id']) && !is_product()) $main_class = 'content-wrap content-sidebar-' . $sidebar_pos . ' col-md-9 col-sm-8 col-xs-12';
         //product template
-        elseif ($sidebar_pos != 'no' && is_active_sidebar($sidebar['id']) && is_product()) $main_class = 'content-wrap content-sidebar-' . $sidebar_pos . ' col-md-12 col-sm-12 col-xs-12';
+        elseif ($sidebar_pos != 'no' && is_active_sidebar($sidebar['id']) && is_product()) $main_class = 'content-wrap content-sidebar-' . $sidebar_pos . ' col-md-9 col-sm-8 col-xs-12';
         return apply_filters('tech888f_main_class', $main_class);
     }
 }
@@ -863,6 +863,21 @@ if(!function_exists('tech888f_get_size_crop')){
     }
 }
 
+// check is vendor page
+if(!function_exists('tech888f_is_vendor_page')){
+    function tech888f_is_vendor_page(){
+        $check  = false;
+        if(class_exists('WCV_Vendors')){
+            $vendor_shop = urldecode( get_query_var( 'vendor_shop' ) );
+            $vendor_id   = WCV_Vendors::get_vendor_id( $vendor_shop );
+            if ( $vendor_id ) {
+                $check = true;
+            }
+        }
+        return $check;
+    }
+}
+
 //Set post view
 if(!function_exists('tech888f_set_post_view')){
     function tech888f_set_post_view($post_id=false){
@@ -870,5 +885,40 @@ if(!function_exists('tech888f_set_post_view')){
         $view=(int)get_post_meta($post_id,'post_views',true);
         $view++;
         update_post_meta($post_id,'post_views',$view);
+    }
+}
+
+// product single function
+
+if(!function_exists('tech888f_get_single_product_class_sidebar')){
+    function tech888f_get_single_product_class_sidebar(){
+        //check sidebar position according theme option
+        $sidebar_pos = tech888f_get_opt('sv_sidebar_position_woo_single');
+        $sidebar_id = tech888f_get_opt('sv_sidebar_woo_single');
+
+        //check sidebar position according product metabox
+
+        $sidebar_post_mtb = tech888f_get_opt('tech888f_sidebar_position');
+
+        if(!empty($sidebar_post_mtb) && $sidebar_pos != $sidebar_post_mtb){
+            $sidebar_pos = $sidebar_post_mtb;
+            $sidebar_id_mtb = tech888f_get_opt('tech888f_select_sidebar');
+            if(!empty($sidebar_id_mtb) && $sidebar_id != $sidebar_id_mtb){
+                $sidebar_id = $sidebar_id_mtb;
+            }
+        }
+        if(tech888f_is_vendor_page()){
+            $sidebar_pos = 'no';
+        }
+        if(($sidebar_pos) != 'no' && is_active_sidebar( $sidebar_id) && is_product()):
+            $detail_prd_class = 'col-md-9 col-sm-8 col-xs-12';
+        else: $detail_prd_class = 'col-md-12 col-sm-12 col-xs-12';
+        endif;
+        $sidebar_info = array(
+            'detail_prd_class' => $detail_prd_class,
+            'sidebar_pos'      => $sidebar_pos,
+            'sidebar_id'       => $sidebar_id,
+        );
+        return apply_filters('tech888f_single_product_class',$sidebar_info);
     }
 }

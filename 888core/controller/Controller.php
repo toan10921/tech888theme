@@ -172,11 +172,11 @@ if (!class_exists('Tech888f_Controller')) {
             }
             if (class_exists('WooCommerce')) {
                 if (tech888f_is_woocommerce_page()) {
-                    $pos = tech888f_get_opt('tech888f_sidebar_position_woo');
+                    $pos = tech888f_get_opt('tech888f_sidebar_position_woo','right');
                     $sidebar_id = tech888f_get_opt('tech888f_sidebar_woo');
                     if (is_single()) {
-                        $pos = tech888f_get_opt('sv_sidebar_position_woo_single');
-                        $sidebar_id = tech888f_get_opt('sv_sidebar_woo_single');
+                        $pos = tech888f_get_opt('tech888f_product_sidebar_pos');
+                        $sidebar_id = tech888f_get_opt('tech888f_product_sidebar_id');
                     }
                 }
             }
@@ -401,8 +401,8 @@ if (!class_exists('Tech888f_Controller')) {
 
         static function tech888f_body_classes($classes)
         {
-            $page_style = tech888f_get_value_by_id('tech888f_page_style');
-            $menu_fixed = tech888f_get_value_by_id('tech888f_menu_fixed');
+            $page_style = tech888f_get_opt('tech888f_page_style');
+            $menu_fixed = tech888f_get_opt('tech888f_menu_fixed');
             $shop_ajax = tech888f_get_opt('shop_ajax');
             $show_preload = tech888f_get_opt('show_preload');
             $theme_info = wp_get_theme();

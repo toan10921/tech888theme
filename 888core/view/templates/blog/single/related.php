@@ -32,7 +32,7 @@ if($check_related == '1'):
     		<a href="<?php echo esc_url(get_author_posts_url(get_the_author_meta('ID'))); ?>"><?php esc_html_e("More From Author","7upframework")?></a>
     	</h2>
     	<div class="related-post-slider">
-    		<div class="wrap-item smart-slider owl-carousel owl-theme" 
+    		<div class="wrap-item tech888-slider owl-carousel owl-theme"
             data-item="" data-speed="<?php echo esc_attr($speed);?>" 
             data-itemres="<?php echo esc_attr($itemres)?>" 
             data-prev="" data-next="" 

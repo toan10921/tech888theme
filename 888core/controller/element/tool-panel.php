@@ -41,13 +41,13 @@ if(!function_exists('tech888f_vc_tool_panel'))
                             </div>';
         if($colors || $colors2){
             // Main color
-            $main_color = tech888f_get_value_by_id('main_color');
+            $main_color = tech888f_get_opt('main_color');
             if(empty($main_color)) $main_color = '#df412f';
             list($rd, $gd, $bd) = sscanf($main_color, "#%02x%02x%02x");
             $rgb_df = $rd.','.$gd.','.$bd;
 
             // Main color2
-            $main_color2 = tech888f_get_value_by_id('main_color2');
+            $main_color2 = tech888f_get_opt('main_color2');
             if(empty($main_color2)) $main_color2 = '#000fff';
             list($rd2, $gd2, $bd2) = sscanf($main_color2, "#%02x%02x%02x");
             $rgb2_df = $rd2.','.$gd2.','.$bd2;

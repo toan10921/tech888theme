@@ -6,7 +6,7 @@ if($show_related == '1' && $related):?>
     <div class="related-product">
         <h2 class="title18 font-bold text-uppercase single-title"><?php esc_html_e("Related products","7upframework")?></h2>
         <div class="product-slider">
-            <?php echo '<div class="wrap-item group-navi smart-slider owl-carousel owl-theme" data-item="" data-speed="" data-itemres="'.esc_attr($item_res).'" data-prev="" data-next="" data-pagination="" data-navigation="true">';?>
+            <?php echo '<div class="wrap-item group-navi tech888-slider owl-carousel owl-theme" data-item="" data-speed="" data-itemres="'.esc_attr($item_res).'" data-prev="" data-next="" data-pagination="" data-navigation="true">';?>
                 <?php
                     $args = array(
                         'post_type'           => 'product',
